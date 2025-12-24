@@ -134,7 +134,9 @@ function App() {
           <label>Num Male Borrowers</label>
           <input type="number" name="num_male_borrowers" value={form.num_male_borrowers} onChange={handleChange} />
         </div>
-
+<div>
+   
+</div>
         <div className="form-group">
           <label>Posted Year</label>
           <input type="number" name="posted_year" value={form.posted_year} onChange={handleChange} />
@@ -159,7 +161,7 @@ function App() {
         </div>
       )}
     </div>
-  );
+  ); 
 }
 
 export default App;
