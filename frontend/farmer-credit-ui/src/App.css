@@ -1,10 +1,10 @@
 /* Import Google Fonts for better typography */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display= swap');
 
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0;  
 }
 
 body {
@@ -221,4 +221,35 @@ button:disabled:hover {
 
 button:disabled {
   animation: pulse 1.5s infinite;
+}
+
+/* Login styles */
+.login-container {
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.login-container h2 {
+  margin-bottom: 1rem;
+  color: #2d6a4f;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.login-container input {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.login-container button {
+  width: 100%;
 }

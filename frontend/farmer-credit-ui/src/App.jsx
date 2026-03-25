@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import Login from "./components/Login";
 
 function App() {
   const [form, setForm] = useState({
@@ -23,6 +24,12 @@ function App() {
   const [mappings, setMappings] = useState({});
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("access_token") || null);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    setToken(null);
+  }
 
   useEffect(() => {
     // Sample mappings based on data
@@ -43,17 +50,31 @@ function App() {
   const submitForm = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/predict", form);
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const response = await axios.post("http://localhost:8000/predict", form, { headers });
       setResult(response.data);
     } catch (err) {
-      alert("Backend not running or error: " + err.message);
+      alert("Backend not running or error: " + (err.response?.data?.detail || err.message));
     }
     setLoading(false);
   };
 
+  if (!token) {
+    return (
+      <div className="container">
+        <Login onLogin={(t) => setToken(t)} />
+      </div>
+    );
+  }
+
   return (
     <div className="container">
-      <h1>🌾 Farmer Credit Assessment System</h1>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h1>🌾 Farmer Credit Assessment System</h1>
+        <div>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </div>
       <p className="subtitle">Predict loan funding probability for agriculture loans</p>
 
       <div className="form-grid">
